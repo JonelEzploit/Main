@@ -1,3 +1,4 @@
+print("SUSSY")
 _G.AutoFarm = true
 
 _G.Area = 'Town'
