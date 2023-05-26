@@ -1,3 +1,5 @@
+print("LOADED:")
+
 _G.AutoFarm = true
 _G.Area = 'Mystic Mine'
 
