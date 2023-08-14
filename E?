@@ -1,0 +1,1032 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "DragonHub - Arm Wrestling Simulator!", HidePremium = false ,IntroText = "Key Pleas! For NOW :DD" ,SaveConfig = true, ConfigFolder = "OrionTest"})
+
+-- global variables 
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local Character = Player.Character
+local PlayerGUI = Player.PlayerGui
+local LocalPlayer = Players.LocalPlayer
+-- varaibles
+local GameUI = PlayerGUI.GameUI
+local Currency = GameUI.Currency
+local Menus = GameUI.Menus
+local Inventory = Menus.PetInventory
+local Trade = GameUI.Menus.Trade
+local Timer = Trade.AcceptedTimer
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Lighting = game:GetService("Lighting")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Packages = ReplicatedStorage.Packages
+local KnitLib = Packages._Index:FindFirstChild("sleitnick_knit@1.4.7")
+local Remotes = KnitLib.knit.Services
+
+local BicepAmount = game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Currency.Bicep.Amount
+local HandAmount = game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Currency.Hand.Amount
+local SpeedAmount = game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Currency.Speed.Amount
+local WinAmount = game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Currency.Rebirths.Amount
+
+local Eggy = game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Menus.Event.Amount
+
+-- anti afk
+
+for _,v in pairs(getconnections(LocalPlayer.Idled)) do
+    v:Disable()
+end
+
+--tabs
+    local HomeTab = Window:MakeTab({
+    Name = "Home ",
+    Icon = "rbxassetid://5436912533",
+    PremiumOnly = false
+    })
+
+    local MainTab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://224144478",
+    PremiumOnly = false
+    })
+
+    local FarmingsTab = Window:MakeTab({
+        Name = "Farm",
+        Icon = "rbxassetid://4814616883",
+        PremiumOnly = false
+        })
+        
+     local BossFarm = Window:MakeTab({
+        Name = "Farm Boss",
+        Icon = "rbxassetid://5005164499",
+        PremiumOnly = false
+        })
+
+    local EventTab = Window:MakeTab({
+        Name = "Event",
+        Icon = "rbxassetid://14071972845",
+        PremiumOnly = false
+        })
+
+            local DualFarming = Window:MakeTab({
+        Name = "Dual Farming",
+        Icon = "rbxassetid://5078542968",
+        PremiumOnly = false
+        })
+        
+        local SeasonTab = Window:MakeTab({
+        Name = "Season",
+        Icon = "rbxassetid://13914216533",
+        PremiumOnly = false
+        })
+
+        local PetsTab = Window:MakeTab({
+        Name = "Pets",
+        Icon = "rbxassetid://13628400877",
+        PremiumOnly = false
+        })
+
+
+-- Stats Tracker
+    --// Power Tracker
+    local BicepLabel = FarmingsTab:AddLabel("Biceps Power: " .. BicepAmount.Text)
+    local HandLabel = FarmingsTab:AddLabel("Hand Power: " .. HandAmount.Text)
+    local SpeedLabel = FarmingsTab:AddLabel("Speed Power: " .. SpeedAmount.Text)
+        --// Boss Tracker Wins
+    local WinLabel = BossFarm:AddLabel("Win Amount: " .. WinAmount.Text)
+
+    --// Egg Event Tracker 
+
+    local EggEventLabel = EventTab:AddLabel("Egg Statics: "..Eggy.Text)
+    _G.Updater = false
+    function Updater()
+        while _G.Updater do
+            BicepLabel:Set("Biceps Power: " .. BicepAmount.Text)
+            HandLabel:Set("Hand Power: " .. HandAmount.Text)
+            SpeedLabel:Set("Speed Power: " .. SpeedAmount.Text)
+            WinLabel:Set("Win Amount: " .. WinAmount.Text)
+            EggEventLabel:Set("Egg Statics: "..Eggy.Text)
+
+            wait(0.5)
+        end
+        BicepLabel:Set("OFF: ")
+        HandLabel:Set("OFF: ")
+        SpeedLabel:Set("OFF: ")
+        WinLabel:Set("OFF: ")
+        EggEventLabel("OFf: ")
+    end
+-- season function 
+    _G.AutoSeasonDumbell = false
+    _G.AutoSeasonGrip = false
+    _G.AutoSeasonBarbell = false
+    _G.AutoSeasonKnuckle = false
+    _G.AutoSeasonHatch = false
+    _G.AutoSeasonCraft = false
+
+    function AutoSeasonDumbells()
+    while _G.AutoSeasonDumbell == true do
+
+        local A_1 = 1
+        local A_2 = "Dumbells"
+        local A_3 = "1Kg"
+
+        local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+        Event:FireServer( A_1, A_2,  A_3)
+
+        local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onClick
+        Event:FireServer()
+        wait(0.00000000000000000000001)
+    end
+    end  
+    function AutoSeasonGrips()
+        while _G.AutoSeasonGrip == true do
+
+            local A_1 = 1
+            local A_2 = "Grips"
+            local A_3 = "1Kg"
+    
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+            Event:FireServer( A_1, A_2,  A_3)
+    
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onClick
+            Event:FireServer()
+            wait(0.00000000000000000000001)
+        end
+        end  
+    function AutoSeasonBarbells()
+        while _G.AutoSeasonBarbell == true do
+
+            local A_1 = 1
+            local A_2 = "Barbells"
+            local A_3 = "Tier1"
+    
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+            Event:FireServer( A_1, A_2,  A_3)
+    
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onClick
+            Event:FireServer()
+
+            wait(0.00000000000000000000001)
+        end
+        end
+    function AutoSeasonKnuckles()
+        while _G.AutoSeasonKnuckle == true do
+            
+            local A_1 = 1
+            local A_2 = "Bags"
+            local A_3 = "Tier1"
+    
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+            Event:FireServer( A_1, A_2,  A_3)
+    
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onClick
+            Event:FireServer()
+
+            wait(0.00000000000000000000001)
+        end
+        end
+    function AutoSeasonCrafts()
+        while _G.AutoSeasonCraft == true do
+            game.Players.LocalPlayer.character.HumanoidRootPart.CFrame = CFrame.new(-10288.064453125, 9.523527145385742, 125.88909149169922)
+
+            local Container = Inventory.Container
+            local Pets = Container.ScrollingFrame.Pets
+            local PetList = {}
+
+            local A_1 = "Earth"
+            local A_2 = {}
+        
+            local Eggs = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.EggService.RF.purchaseEgg
+
+            for i, v in pairs(Pets:GetChildren()) do
+                if v:IsA("Frame") then
+                    if v.Toggle.LockPet.Visible == false then
+                        table.insert(PetList, v.Name)
+                    end
+                end
+            end
+
+            for i, v in PetList do
+                for i, v in PetList do
+                   local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.PetService.RF.craft
+                    local Args = {
+                        [1] = v
+                    }
+                Event:InvokeServer(unpack(Args))
+                Eggs:InvokeServer(A_1, A_2)
+            end
+        end
+            wait(0.00000000000000000000001)
+        end
+        end  
+    function AutoSeasonHatchs()
+        while _G.AutoSeasonHatch == true do
+            game.Players.LocalPlayer.character.HumanoidRootPart.CFrame = CFrame.new(-10288.064453125, 9.523527145385742, 125.88909149169922)
+            local A_1 = "Earth"
+            local A_2 = {}
+        
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.EggService.RF.purchaseEgg
+
+            Event:InvokeServer(A_1, A_2)
+            wait(0.00000000000000000000001)
+        end
+        end        
+-- click function
+
+    _G.OnClick = false
+
+    function Clickers()
+    while _G.OnClick == true do
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onClickRequest
+    Event:FireServer()
+    wait(0.00000000000000000000000000000000001)
+    end
+    end 
+-- function farm
+    _G.Farmer = false
+
+    _G.SelectTool = "Dumbells"
+    _G.SelectToolFarm = "Dumbells"
+    _G.SelectToolFarms = "Barbells"
+
+    _G.Level = "1"
+    _G.Levele = "2"
+    _G.Levels = "3"
+    _G.Levelss = "4"
+    _G.Weight = "1Kg"
+    _G.LevelFarm = "1"
+    _G.LevelFarms= "2"
+    _G.LevelFarmss= "3"
+    _G.LevelFarmsss = "4"
+    _G.WeightFarm = "1Kg"
+    _G.WorldFarm = "1"
+    _G.TierFarm = "Tier1"
+    _G.WorldFarms = "1"
+    _G.WorldFarmss = "2"
+    _G.WorldFarmsss = "3"
+    _G.WorldFarmssss = "4"
+    _G.TierFarms = "Tier1"
+    _G.BarbellsWorld = "1"
+    _G.BarbellsWorlds = "2"
+    _G.BarbellsWorldss = "3"
+    _G.BarbellsWorldsss = "4"
+    _G.BarbellsTier = "Tier1"
+    _G.FarmingTab = false
+    _G.FarmingsTab = false
+    _G.FarmingssTab = false
+    _G.World = "1"
+    _G.Tier = "Tier1"
+    function Farmses()
+    while _G.Farmer == true do
+        -- Dumbells % Grips
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+    Event:FireServer(_G.Level, _G.SelectTool, _G.Weight)
+
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+    Event:FireServer(_G.Levele, _G.SelectTool, _G.Weight)
+
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+    Event:FireServer(_G.Levels, _G.SelectTool, _G.Weight)
+
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+    Event:FireServer(_G.Levelss, _G.SelectTool, _G.Weight)
+
+    -- Barbelss
+
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onEquipRequest
+    Event:FireServer(_G.BarbellsWorld, _G.SelectTool , _G.BarbellsTier )
+
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onEquipRequest
+    Event:FireServer(_G.BarbellsWorlds, _G.SelectTool , _G.BarbellsTier )
+
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onEquipRequest
+    Event:FireServer(_G.BarbellsWorldss, _G.SelectTool , _G.BarbellsTier )
+
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onEquipRequest
+    Event:FireServer(_G.BarbellsWorldsss, _G.SelectTool , _G.BarbellsTier )
+
+        -- bags
+    local A_3 = true
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.PunchBagService.RE.onGiveStats
+    Event:FireServer(_G.World, _G.Tier, A_3)
+
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onClick
+    Event:FireServer()
+    wait(0.1)
+    end
+    end
+-- World Boss
+    _G.FarmBossDelay = Value
+    _G.FarmBossValue = "Bully"
+    _G.FarmBossWorld = "1"
+    _G.FarmBoss = false
+
+    function FarmBosse()
+    while _G.FarmBoss == true do   
+
+        local A_1 = _G.FarmBossValue
+        local A_2 = game:GetService("Workspace").Zones[_G.FarmBossWorld].Interactables.ArmWrestling.NPC[_G.FarmBossValue]
+        local A_3 = _G.FarmBossWorld
+        local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onEnterNPCTable
+        Event:FireServer(A_1, A_2, A_3)
+
+
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onClickRequest
+    Event:FireServer()
+        wait(0.00000000000000000000001)
+    end
+    end
+
+-- Event World
+
+    _G.World2 = false
+    _G.World3 = false
+    _G.EggHatchTypes = 1
+    _G.AutoHatchEvent = false
+    _G.FarmDelay = 1
+
+    function World2s()
+    while _G.World2 == true do  
+        local A_1 = "RipperDoc"
+        local A_2 = game:GetService("Workspace").Zones["2"].Interactables.ArmWrestling.NPC.RipperDoc
+        local A_3 = "2"
+        local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onEnterNPCTable
+    Event:FireServer(A_1, A_2, A_3)
+    wait(_G.FarmDelay)
+    end
+    end
+    function World3s()
+    while _G.World3 == true do  
+    local A_1 = "CocoNut"
+    local A_2 = game:GetService("Workspace").Zones["3"].Interactables.ArmWrestling.NPC.CocoNut
+    local A_3 = "3"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onEnterNPCTable
+    Event:FireServer(A_1, A_2, A_3)
+    wait(_G.FarmDelay)
+    end
+    end
+    function AutoHatchEvents()
+    while _G.AutoHatchEvent == true do
+    local A_1 = _G.EggHatchTypes
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.EventService.RF.ClaimEgg
+    Event:InvokeServer(A_1)
+    wait(0.01)
+    end
+    end
+-- Main Tab 
+    function Potions()
+    while _G.Uses == true do 
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.BoostService.RE.useBoost
+    Event:FireServer(_G.SelectPot)
+    wait(0.01)
+    end
+    end
+
+    _G.Uses = false
+    _G.SelectPot = "Wins"
+
+    _G.Reb = false
+    _G.Spi = false
+    _G.Ef = false
+    _G.Gif = false
+    _G.Dai = false
+    function Rebirths()
+    while _G.Reb == true do
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.RebirthService.RE.onRebirthRequest
+    Event:FireServer()
+
+        wait(0.01)
+    end
+    end
+    function Spins()
+    while _G.Spi == true do
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.SpinService.RE.onSpinRequest
+    Event:FireServer()
+        wait(0.01)
+    end
+    end
+    function PetsE()
+    while _G.Ef == true do
+    local A_1 = game:GetService("Players").LocalPlayer
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.PetService.RF.equipBest
+    Event:InvokeServer(A_1)
+
+        wait(0.01)
+    end
+    end
+    function Gifts()
+    while _G.Gif == true do
+    local A_1 = "1"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "2"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "3"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "4"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "5"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "6"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "7"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "8"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "9"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "10"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "11"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+    local A_1 = "12"
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.TimedRewardService.RE.onClaim
+    Event:FireServer(A_1)
+        wait(0.01)
+    end
+    end
+    function Dailys()
+    while _G.Dai == true do
+    local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.DailyRewardService.RE.onClaimReward
+    Event:FireServer()
+        wait(0.01)
+    end
+    end
+-- farming tab function
+    function FarmingsTabs()
+    while _G.FarmingTab == true do
+        local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onClick
+        Event:FireServer()
+        wait(0.001)
+    end
+    end
+    function FarmingsTabss()
+    while _G.FarmingsTab == true do
+        local A_3 = true
+        local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.PunchBagService.RE.onGiveStats
+        Event:FireServer(_G.WorldFarm, _G.TierFarm, A_3)
+        wait(0.001)
+    end
+    end
+    function FarmingsTabsss()
+    while _G.FarmingssTab == true do
+        local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onClick
+        Event:FireServer()
+        wait(0.0001)
+    end
+    end
+-- Pet Tab Functions
+    _G.World1 = "None"
+    _G.World2 = "None"
+    _G.World3 = "None"
+    _G.World4 = "None"
+    _G.HatchEgg1 = false
+    _G.HatchEgg2 = false
+    _G.HatchEgg3 = false
+    _G.HatchEgg4 = false
+    function HathcEggs1()
+        while _G.HatchEgg1 == true do
+    local A_2 = {}
+    local Event1 = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.EggService.RF.purchaseEgg
+    Event1:InvokeServer(_G.World1, A_2)    
+            wait(0.00001)
+        end
+    end
+    function HathcEggs2()
+        while _G.HatchEgg2 == true do
+    local A_2 = {}
+    local Event1 = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.EggService.RF.purchaseEgg
+    Event1:InvokeServer(_G.World2, A_2)    
+            wait(0.00001)
+        end
+    end
+    function HathcEggs3()
+        while _G.HatchEgg3 == true do
+    local A_2 = {}
+    local Event1 = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.EggService.RF.purchaseEgg
+    Event1:InvokeServer(_G.World3, A_2)    
+            wait(0.00001)
+        end
+    end
+    function HathcEggs4()
+        while _G.HatchEgg4 == true do
+    local A_2 = {}
+    local Event1 = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.EggService.RF.purchaseEgg
+    Event1:InvokeServer(_G.World4, A_2)    
+            wait(0.00001)
+        end
+    end
+
+
+
+        
+-- Home Tab
+    local Section = HomeTab:AddSection({
+	Name = "Creatids - Updates Log!"
+    })
+    HomeTab:AddParagraph("Update Log","✅ Fixed Bugs\n Added Anti Afk Inbuilt! \nScript Is Still On beta will have beter features soon!\n 🌠Up Comming Features! \n Auto Legue\n Auto Enchant \n Auto Delete\n Auto Mutate Gold And More about Pets! Soon ")
+    HomeTab:AddParagraph("Creadits!","👑> Head Developer - Negus")
+
+    HomeTab:AddButton({
+	Name = "Copy Discord Invate!",
+	Callback = function()
+        setclipboard("https://discord.gg/cKSg2ncw6K")
+  	end    
+    })
+    HomeTab:AddToggle({
+        Name = "Stat Tracker",
+        Default = false,
+        Callback = function(Value)
+            _G.Updater = Value
+            if _G.Updater then
+                Updater()
+            end
+        end
+    })
+    
+-- Main Tab
+    local Section = MainTab:AddSection({
+	Name = "Automatic Rebirths And More!"
+    })
+    MainTab:AddToggle({
+    Name = "Auto Rebirth",
+    Default = false,
+    Callback = function(Value)
+    _G.Reb = Value
+    Rebirths()
+        end    
+    })
+    MainTab:AddToggle({
+    Name = "Auto Spin",
+    Default = false,
+    Callback = function(Value)
+    _G.Spi = Value
+    Spins()
+        end    
+    })
+    MainTab:AddToggle({
+    Name = "Auto Equip pet",
+    Default = false,
+    Callback = function(Value)
+    _G.Ef = Value
+    PetsE()
+        end    
+    })
+    MainTab:AddToggle({
+    Name = "Auto Gift",
+    Default = false,
+    Callback = function(Value)
+    _G.Gif = Value
+    Gifts()
+        end    
+    })
+    MainTab:AddToggle({
+    Name = "Auto Daily",
+    Default = false,
+    Callback = function(Value)
+    _G.Dai = Value
+    Dailys()
+        end    
+    })
+
+    local Section = MainTab:AddSection({
+        Name = "Auto Use Potion!"
+        })
+
+    MainTab:AddDropdown({
+    Name = "Select Potion!",
+    Default = "Wins",
+    Options = {"Wins", "Luck", "Gold", "Void"},
+    Callback = function(Value)
+        _G.SelectPot = Value
+        end    
+    })
+    MainTab:AddToggle({
+    Name = "Auto Use!",
+    Default = false,
+    Callback = function(Value)
+    _G.Uses = Value
+    Potions()
+        end    
+    })
+
+
+-- Farm Tab
+
+    local Section = FarmingsTab:AddSection({
+	Name = "Farm - Dumbells & Grips!"
+    })
+    FarmingsTab:AddDropdown({
+        Name = "Select Tool",
+        Default = "Dumbells",
+        Options = {"Dumbells", "Grips"},
+        Callback = function(Value)
+            _G.SelectToolFarm = Value
+            end    
+        })
+    FarmingsTab:AddDropdown({
+        Name = "Select KG",
+        Default = "1Kg",
+        Options = {"1Kg", "2Kg", "3Kg", "4Kg", "5Kg", "10Kg", "15Kg", "20Kg", "25Kg", "50Kg", "100Kg", "250Kg", "300Kg", "400Kg", "500Kg", "650Kg", "800Kg", "1000Kg", "1500Kg", "2000Kg", "2500Kg", "3000Kg", "3500Kg", "4000Kg", "5000Kg", "6000Kg", "7500Kg", "10000Kg", "12500Kg", "15000Kg", "20000Kg", "25000Kg", "30000Kg", "35000Kg", "40000Kg", "45000Kg", "50000Kg", "60000Kg", "70000Kg", "80000Kg", "90000Kg", "100000Kg", "125000Kg", "150000Kg", "175000Kg", "200000Kg", "250000Kg", "300000Kg"},
+         Callback = function(Value)
+            _G.WeightFarm = Value  
+            end    
+        })
+    FarmingsTab:AddButton({
+        Name = "Equip Tool",
+        Callback = function()
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+            Event:FireServer(_G.LevelFarm, _G.SelectToolFarm, _G.WeightFarm)
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+            Event:FireServer(_G.LevelFarms, _G.SelectToolFarm, _G.WeightFarm)
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+            Event:FireServer(_G.LevelFarmss, _G.SelectToolFarm, _G.WeightFarm)
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onGuiEquipRequest
+            Event:FireServer(_G.LevelFarmsss, _G.SelectToolFarm, _G.WeightFarm)
+            end    
+        })
+    FarmingsTab:AddToggle({
+        Name = "Auto Farm Selected!",
+        Default = false,
+        Callback = function(Value)
+        _G.FarmingTab = Value
+        FarmingsTabs()
+            end    
+        })
+
+    local Section = FarmingsTab:AddSection({
+        Name = "Farm - Barbells!"
+        })
+
+    FarmingsTab:AddDropdown({
+        Name = "Select Tier",
+        Default = "Tier1",
+        Options = {"Tier1", "Tier2", "Tier3", "Tier4", "Tier5", "Tier6", "Tier7", "Tier8", "Tier9", "Tier10", "Tier11", "Tier12"},
+        Callback = function(Value)
+            _G.TierFarms = Value  
+            end    
+        })
+
+    FarmingsTab:AddButton({
+        Name = "Equip Tool",
+        Callback = function()
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onEquipRequest
+            Event:FireServer(_G.WorldFarms, _G.SelectToolFarms , _G.TierFarms )
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onEquipRequest
+            Event:FireServer(_G.WorldFarmss, _G.SelectToolFarms , _G.TierFarms )
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onEquipRequest
+            Event:FireServer(_G.WorldFarmsss, _G.SelectToolFarms , _G.TierFarms )
+            local Event = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onEquipRequest
+            Event:FireServer(_G.WorldFarmssss, _G.SelectToolFarms , _G.TierFarms )
+        end    
+        })
+
+    FarmingsTab:AddToggle({
+        Name = "Enable Farm!",
+        Default = false,
+        Callback = function(Value)
+            _G.FarmingssTab = Value
+            FarmingsTabsss()
+            end    
+        })
+
+        local Section = FarmingsTab:AddSection({
+            Name = "Farm - Bags/Knuckles!"
+            })
+
+        FarmingsTab:AddDropdown({
+            Name = "Select Zone",
+            Default = "1",
+            Options = {"1", "2", "3", "4"},
+            Callback = function(Value)
+                _G.WorldFarm = Value 
+                end    
+            })
+    
+        FarmingsTab:AddDropdown({
+            Name = "Select Bags",
+            Default = "Tier1",
+            Options = {"Tier1", "Tier2", "Tier3", "Tier4", "Tier5", "Tier6", "VIP"},
+            Callback = function(Value)
+                _G.TierFarm = Value  
+                end    
+            })
+    
+        FarmingsTab:AddToggle({
+            Name = "Enable Farm!",
+            Default = false,
+            Callback = function(Value)
+                _G.FarmingsTab = Value
+                FarmingsTabss()
+                end    
+            })
+
+-- Boss Tab
+    local Section = BossFarm:AddSection({
+	Name = "Boss - Auto Farming!"
+    })
+
+    BossFarm:AddDropdown({
+    Name = "Select Boss",
+    Default = "None",
+    Options = {"None", "Bully", "Teacher", "GymRat", "MafiaBoss", "Champion", "ScrapTrader", "CyberCop", "SlicerAssassin", "RipperDoc", "RogueAi", "CocoNut", "FatPirate", "MermaidKing", "FriendlyShark", "KrakenBoss", "Barbarian", "Hazmat", "Enforcer", "Bulk", "MutantKing" },
+    Callback = function(Value)
+        _G.FarmBossValue = Value
+        end    
+    })
+    BossFarm:AddDropdown({
+        Name = "Select Boss Zone",
+        Default = "1",
+        Options = {"1", "2", "3", "4"},
+        Callback = function(Value)
+            _G.FarmBossWorld = Value
+            end    
+        })
+    
+    BossFarm:AddToggle({
+        Name = "Farm Boss",
+        Default = false,
+        Callback = function(Value)
+        _G.FarmBoss = Value
+        FarmBosse()
+            end    
+        })
+
+-- dual farming drop down
+    local Section = DualFarming:AddSection({
+	Name = "Dual Farming - Multifarm!"
+    })
+    DualFarming:AddParagraph("How To Use","\n1. Select Dumbells, Grips, Barbells\n2. Select Bag For Knuckle\n\nNote: This Can Also Works with one Selected! Triple Farm aint that good and not even possible Lol since there both cooldown are the same!")
+    local Section = DualFarming:AddSection({
+        Name = "Dual Farming - Multifarm 1"
+        })
+    DualFarming:AddDropdown({
+        Name = "Select Tool",
+        Default = "Dumbells",
+        Options = {"Dumbells", "Grips", "Barbells"},
+        Callback = function(Value)
+            _G.SelectTool = Value
+            end    
+        })
+    DualFarming:AddDropdown({
+        Name = "Select Tier Barbells",
+        Default = "Tier1",
+        Options = {"Tier1", "Tier2", "Tier3", "Tier4", "Tier5", "Tier6", "Tier7", "Tier8", "Tier9", "Tier10", "Tier11", "Tier12"},
+        Callback = function(Value)
+            _G.BarbellsTier = Value  
+            end    
+            })
+    DualFarming:AddDropdown({
+        Name = "Select Kg",
+        Default = "1Kg",
+        Options = {"1Kg", "2Kg", "3Kg", "4Kg", "5Kg", "10Kg", "15Kg", "20Kg", "25Kg", "50Kg", "100Kg", "250Kg", "300Kg", "400Kg", "500Kg", "650Kg", "800Kg", "1000Kg", "1500Kg", "2000Kg", "2500Kg", "3000Kg", "3500Kg", "4000Kg", "5000Kg", "6000Kg", "7500Kg", "10000Kg", "12500Kg", "15000Kg", "20000Kg", "25000Kg", "30000Kg", "35000Kg", "40000Kg", "45000Kg", "50000Kg", "60000Kg", "70000Kg", "80000Kg", "90000Kg", "100000Kg", "125000Kg", "150000Kg", "175000Kg", "200000Kg", "250000Kg", "300000Kg"},
+        Callback = function(Value)
+            _G.Weight = Value
+                
+            end    
+        })
+    local Section = DualFarming:AddSection({
+        Name = "Dual Farming - Multifarm 2"
+        })
+    DualFarming:AddDropdown({
+        Name = "Select Bag World",
+        Default = "1",
+        Options = {"1", "2", "3", "4"},
+        Callback = function(Value)
+            _G.World = Value 
+            end    
+        })
+
+    DualFarming:AddDropdown({
+        Name = "Select Bags",
+        Default = "Tier1",
+        Options = {"Tier1", "Tier2", "Tier3", "Tier4", "Tier5", "Tier6", "VIP"},
+        Callback = function(Value)
+            _G.Tier = Value  
+            end    
+        })
+    DualFarming:AddToggle({
+        Name = "Enable Farm!",
+        Default = false,
+        Callback = function(Value)
+            _G.Farmer = Value
+            Farmses()
+            end    
+        })
+      
+
+
+-- Event
+    local Section = EventTab:AddSection({
+	Name = "Event - Auto Event Egg"
+    })
+    EventTab:AddSlider({
+    Name = "Farm Delay",
+    Min = 5,
+    Max = 20,
+    Default = _G.FarmDelay,
+    Increment = 1,
+    ValueName = "s",
+    Callback = function(Value)
+        _G.FarmDelay = Value
+    end
+    })
+    EventTab:AddToggle({
+        Name = "Auto Click Boss",
+        Default = false,
+        Callback = function(Value)
+        _G.OnClick = Value
+        Clickers()
+            end    
+    })
+    EventTab:AddToggle({
+    Name = "Auto World 2",
+    Default = false,
+    Callback = function(Value)
+    _G.World2 = Value
+    World2s()
+        end    
+    })
+    EventTab:AddToggle({
+    Name = "Auto World 3",
+    Default = false,
+    Callback = function(Value)
+    _G.World3 = Value
+    World3s()
+        end    
+    })
+    local Section = EventTab:AddSection({
+        Name = "Event - Auto Hatch!"
+        })
+    EventTab:AddDropdown({
+        Name = "Hatch Type!",
+        Default = "1",
+        Options = {"1", "3", "8"},
+        Callback = function(Value)
+            _G.EggHatchTypes = tonumber(Value)
+        end    
+    })
+    
+    EventTab:AddToggle({
+        Name = "Auto Hatch Event",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoHatchEvent = Value
+            AutoHatchEvents()
+        end    
+    })
+
+-- Season Tab
+
+    local Section = SeasonTab:AddSection({
+	Name = "Season - Auto Season Quest!"
+    })
+
+    SeasonTab:AddToggle({
+        Name = "Auto Quest Dumbells!",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoSeasonDumbell = Value
+            AutoSeasonDumbells()
+        end    
+    })
+
+    SeasonTab:AddToggle({
+        Name = "Auto Quest Grips!",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoSeasonGrip = Value
+            AutoSeasonGrips()
+        end    
+    })
+
+    SeasonTab:AddToggle({
+        Name = "Auto Quest Barbells!",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoSeasonBarbell = Value
+            AutoSeasonBarbells()
+        end    
+    })
+
+    SeasonTab:AddToggle({
+        Name = "Auto Quest Knuckles!",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoSeasonKnuckle = Value
+            AutoSeasonKnuckles()
+        end    
+    })
+
+    SeasonTab:AddToggle({
+        Name = "Auto Quest Crafts!",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoSeasonCraft = Value
+                        AutoSeasonCrafts()
+        end    
+    })
+
+    SeasonTab:AddToggle({
+        Name = "Auto Quest Hatch!",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoSeasonHatch = Value
+            AutoSeasonHatchs()
+        end    
+    })
+
+    local Section = SeasonTab:AddSection({
+	Name = "Season - Auto Claim!"
+    })
+
+-- Pets Tavs
+
+    local Section = PetsTab:AddSection({
+	Name = "Pets - Auto Hatch Eggs!"
+    })
+
+    PetsTab:AddParagraph("Auto Hatch","Make Sure You ONLY Select One Egg Per World Might Crash or not work If multiple!")
+
+    PetsTab:AddDropdown({
+        Name = "World 1 Egg!",
+        Default = "None",
+        Options = {"None", "Earth", "Grass", "Icy", "Lava"},
+        Callback = function(Value)
+            _G.World1 = Value
+        end    
+    })
+
+    PetsTab:AddToggle({
+        Name = "Auto Hatch World 1",
+        Default = false,
+        Callback = function(Value)
+            _G.HatchEgg1 = Value
+            HathcEggs1()
+        end    
+    })
+
+    PetsTab:AddDropdown({
+        Name = "World 2 Egg!",
+        Default = "None",
+        Options = {"None", "Burning", "Crystal", "Ice", "Molton", "Moon", "Solar"},
+        Callback = function(Value)
+            _G.World2 = Value
+        end    
+    })
+
+    PetsTab:AddToggle({
+        Name = "Auto Hatch World 2",
+        Default = false,
+        Callback = function(Value)
+            _G.HatchEgg2 = Value
+            HathcEggs2()
+        end    
+    })
+
+    PetsTab:AddDropdown({
+        Name = "World 3 Egg!",
+        Default = "None",
+        Options = {"None", "Clam", "Coconut", "King Fist", "Palm", "Poseidon", "Treasure"},
+        Callback = function(Value)
+            _G.World3 = Value
+        end    
+    })
+
+    PetsTab:AddToggle({
+        Name = "Auto Hatch World 3",
+        Default = false,
+        Callback = function(Value)
+            _G.HatchEgg3 = Value
+            HathcEggs3()
+        end    
+    })
+
+    PetsTab:AddDropdown({
+        Name = "World 4 Egg!",
+        Default = "None",
+        Options = {"None", "Atom", "Iridescent", "Mutant", "Nuclear", "Rust", "Widget"},
+        Callback = function(Value)
+            _G.World4 = Value
+        end    
+    })
+
+    PetsTab:AddToggle({
+        Name = "Auto Hatch World 4",
+        Default = false,
+        Callback = function(Value)
+            _G.HatchEgg4 = Value
+            HathcEggs4()
+        end    
+    })
+
+OrionLib:Init() 
